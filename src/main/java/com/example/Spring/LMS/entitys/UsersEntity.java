@@ -14,20 +14,20 @@ public class UsersEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private UserRole role;
 
-    @Column(name = "date_created")
+    @Column(name = "date_created", nullable = false)
     private LocalDateTime dateCreated;
 
     @OneToMany(mappedBy = "teacher", orphanRemoval = true, cascade = CascadeType.ALL)

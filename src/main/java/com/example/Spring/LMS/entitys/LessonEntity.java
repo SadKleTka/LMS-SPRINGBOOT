@@ -13,7 +13,7 @@ public class LessonEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "content")
@@ -23,21 +23,21 @@ public class LessonEntity {
     private String videoUrl;
 
     @ManyToOne
-    @JoinColumn(name = "course_id", referencedColumnName = "id")
-    private CourseEntity courseEntity;
+    @JoinColumn(name = "course_id", referencedColumnName = "id", nullable = false)
+    private CourseEntity course;
 
-    @OneToOne(mappedBy = "lesson", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "lessons", orphanRemoval = true, cascade = CascadeType.ALL)
     private TestEntity test;
 
-    @OneToMany(mappedBy = "lesson", orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<ProgressEntity> studentsProgressEntities = new ArrayList<>();
+    @OneToMany(mappedBy = "lessons", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<ProgressEntity> studentsProgress = new ArrayList<>();
 
     public List<ProgressEntity> getStudentsProgress() {
-        return studentsProgressEntities;
+        return studentsProgress;
     }
 
     public void setStudentsProgress(List<ProgressEntity> studentsProgressEntities) {
-        this.studentsProgressEntities = studentsProgressEntities;
+        this.studentsProgress = studentsProgressEntities;
     }
 
     public LessonEntity() {}
@@ -54,7 +54,7 @@ public class LessonEntity {
         this.name = name;
         this.content = content;
         this.videoUrl = videoUrl;
-        this.courseEntity = courseEntity;
+        this.course = courseEntity;
     }
 
     public Long getId() {
@@ -90,10 +90,10 @@ public class LessonEntity {
     }
 
     public CourseEntity getCourse() {
-        return courseEntity;
+        return course;
     }
 
     public void setCourse(CourseEntity courseEntity) {
-        this.courseEntity = courseEntity;
+        this.course = courseEntity;
     }
 }

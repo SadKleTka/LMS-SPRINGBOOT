@@ -14,22 +14,22 @@ public class EnrollmentEntity {
     private Long id;
 
     @CreationTimestamp
-    @Column(name = "date_enrollment")
+    @Column(name = "date_enrollment", nullable = false)
     private LocalDateTime dateEnrollment;
 
     @ManyToOne
-    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    @JoinColumn(name = "student_id", referencedColumnName = "id", nullable = false)
     private UsersEntity student;
 
     @ManyToOne
-    @JoinColumn(name = "course_id", referencedColumnName = "id")
-    private CourseEntity courseEntity;
+    @JoinColumn(name = "course_id", referencedColumnName = "id", nullable = false)
+    private CourseEntity course;
 
     public EnrollmentEntity() {}
 
     public EnrollmentEntity(UsersEntity student, CourseEntity courseEntity) {
         this.student = student;
-        this.courseEntity = courseEntity;
+        this.course = courseEntity;
     }
 
     public Long getId() {
@@ -57,10 +57,10 @@ public class EnrollmentEntity {
     }
 
     public CourseEntity getCourse() {
-        return courseEntity;
+        return course;
     }
 
     public void setCourse(CourseEntity courseEntity) {
-        this.courseEntity = courseEntity;
+        this.course = courseEntity;
     }
 }

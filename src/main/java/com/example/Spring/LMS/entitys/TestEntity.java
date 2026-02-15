@@ -16,25 +16,25 @@ public class TestEntity {
     private String name;
 
     @OneToOne
-    @JoinColumn(name = "lesson_id", referencedColumnName = "id")
-    private LessonEntity lessonEntity;
+    @JoinColumn(name = "lesson_id", referencedColumnName = "id", nullable = false)
+    private LessonEntity lessons;
 
     @OneToMany(mappedBy = "test", orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<QuestionEntity> questionEntities = new ArrayList<>();
+    private List<QuestionEntity> questions = new ArrayList<>();
 
     public List<QuestionEntity> getQuestions() {
-        return questionEntities;
+        return questions;
     }
     public TestEntity() {}
 
     public TestEntity(String name, LessonEntity lessonEntity, List<QuestionEntity> questionEntities) {
         this.name = name;
-        this.lessonEntity = lessonEntity;
-        this.questionEntities = questionEntities;
+        this.lessons = lessonEntity;
+        this.questions = questionEntities;
     }
 
     public void setQuestions(List<QuestionEntity> questionEntities) {
-        this.questionEntities = questionEntities;
+        this.questions = questionEntities;
     }
 
     public Long getId() {
@@ -53,11 +53,11 @@ public class TestEntity {
         this.name = name;
     }
 
-    public LessonEntity getLesson() {
-        return lessonEntity;
+    public LessonEntity getLessons() {
+        return lessons;
     }
 
-    public void setLesson(LessonEntity lessonEntity) {
-        this.lessonEntity = lessonEntity;
+    public void setLessons(LessonEntity lessonEntity) {
+        this.lessons = lessonEntity;
     }
 }

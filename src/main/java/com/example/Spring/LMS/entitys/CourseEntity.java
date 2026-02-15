@@ -13,7 +13,7 @@ public class CourseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "description")
@@ -27,34 +27,34 @@ public class CourseEntity {
     private CourseLevel level;
 
     @ManyToOne
-    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
+    @JoinColumn(name = "teacher_id", referencedColumnName = "id", nullable = false)
     private UsersEntity teacher;
 
     @OneToMany(mappedBy = "course", orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<LessonEntity> lessonEntities = new ArrayList<>();
+    private List<LessonEntity> lessons = new ArrayList<>();
 
     @OneToMany(mappedBy = "course", orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<EnrollmentEntity> enrollmentEntities = new ArrayList<>();
+    private List<EnrollmentEntity> enrollment = new ArrayList<>();
 
     @OneToMany(mappedBy = "course", orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<CommentEntity> commentEntities = new ArrayList<>();
+    private List<CommentEntity> comment = new ArrayList<>();
 
     public List<CommentEntity> getComments() {
-        return commentEntities;
+        return comment;
     }
 
-    public void setComments(List<CommentEntity> commentEntities) {
-        this.commentEntities = commentEntities;
+    public void setComments(List<CommentEntity> comment) {
+        this.comment = comment;
     }
 
     public CourseEntity() {}
 
     public List<LessonEntity> getLessons() {
-        return lessonEntities;
+        return lessons;
     }
 
-    public void setLessons(List<LessonEntity> lessonEntities) {
-        this.lessonEntities = lessonEntities;
+    public void setLessons(List<LessonEntity> lessons) {
+        this.lessons = lessons;
     }
 
     public CourseEntity(String name, String description, String category, CourseLevel level, UsersEntity teacher) {
@@ -82,11 +82,11 @@ public class CourseEntity {
     }
 
     public List<EnrollmentEntity> getEnrollments() {
-        return enrollmentEntities;
+        return enrollment;
     }
 
     public void setEnrollments(List<EnrollmentEntity> enrollmentEntities) {
-        this.enrollmentEntities = enrollmentEntities;
+        this.enrollment = enrollmentEntities;
     }
 
     public String getDescription() {

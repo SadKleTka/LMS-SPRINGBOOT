@@ -13,11 +13,11 @@ public class QuestionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "text")
+    @Column(name = "text", nullable = false)
     private String text;
 
     @ManyToOne
-    @JoinColumn(name = "test_id", referencedColumnName = "id")
+    @JoinColumn(name = "test_id", referencedColumnName = "id", nullable = false)
     private TestEntity test;
 
     @OneToMany(mappedBy = "question", orphanRemoval = true, cascade = CascadeType.ALL)

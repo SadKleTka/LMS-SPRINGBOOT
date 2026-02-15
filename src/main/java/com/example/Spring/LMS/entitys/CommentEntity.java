@@ -13,27 +13,27 @@ public class CommentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "text")
+    @Column(name = "text", nullable = false)
     private String text;
 
     @CreationTimestamp
-    @Column(name = "created_at")
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private UsersEntity user;
 
     @ManyToOne
-    @JoinColumn(name = "course_id", referencedColumnName = "id")
-    private CourseEntity courseEntity;
+    @JoinColumn(name = "course_id", referencedColumnName = "id", nullable = false)
+    private CourseEntity course;
 
     public CommentEntity() {}
 
-    public CommentEntity(String text, UsersEntity student, CourseEntity courseEntity) {
+    public CommentEntity(String text, UsersEntity student, CourseEntity course) {
         this.text = text;
         this.user = student;
-        this.courseEntity = courseEntity;
+        this.course = course;
     }
 
     public Long getId() {
@@ -69,11 +69,11 @@ public class CommentEntity {
     }
 
     public CourseEntity getCourse() {
-        return courseEntity;
+        return course;
     }
 
-    public void setCourse(CourseEntity courseEntity) {
-        this.courseEntity = courseEntity;
+    public void setCourse(CourseEntity course) {
+        this.course = course;
     }
 
     @Override

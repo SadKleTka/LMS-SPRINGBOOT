@@ -15,7 +15,7 @@ public class ProgressEntity {
     private Long id;
 
     @CreationTimestamp
-    @Column(name = "completed_at")
+    @Column(name = "completed_at", nullable = false)
     private LocalDateTime completedAt;
 
     @Enumerated(EnumType.STRING)
@@ -23,17 +23,17 @@ public class ProgressEntity {
     private StatusOfProgress status;
 
     @ManyToOne
-    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    @JoinColumn(name = "student_id", referencedColumnName = "id", nullable = false)
     private UsersEntity student;
 
     @ManyToOne
-    @JoinColumn(name = "lesson_id", referencedColumnName = "id")
-    private LessonEntity lessonEntity;
+    @JoinColumn(name = "lesson_id", referencedColumnName = "id", nullable = false)
+    private LessonEntity lessons;
 
     public ProgressEntity(LocalDateTime completedAt, UsersEntity student, LessonEntity lessonEntity, StatusOfProgress status) {
         this.completedAt = completedAt;
         this.student = student;
-        this.lessonEntity = lessonEntity;
+        this.lessons = lessonEntity;
         this.status = status;
     }
 
@@ -72,10 +72,10 @@ public class ProgressEntity {
     }
 
     public LessonEntity getLesson() {
-        return lessonEntity;
+        return lessons;
     }
 
     public void setLesson(LessonEntity lessonEntity) {
-        this.lessonEntity = lessonEntity;
+        this.lessons = lessonEntity;
     }
 }

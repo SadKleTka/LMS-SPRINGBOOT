@@ -10,20 +10,20 @@ public class AnswerOptionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "text")
+    @Column(name = "text", nullable = false)
     private String text;
 
-    @Column(name = "is_correct")
+    @Column(name = "is_correct", nullable = false)
     private Boolean isCorrect;
 
     @ManyToOne
-    @JoinColumn(name = "question_id", referencedColumnName = "id")
-    private QuestionEntity questionEntity;
+    @JoinColumn(name = "question_id", referencedColumnName = "id", nullable = false)
+    private QuestionEntity question;
 
     public AnswerOptionEntity() {}
 
-    public AnswerOptionEntity(QuestionEntity questionEntity, String text, Boolean isCorrect) {
-        this.questionEntity = questionEntity;
+    public AnswerOptionEntity(QuestionEntity question, String text, Boolean isCorrect) {
+        this.question = question;
         this.text = text;
         this.isCorrect = isCorrect;
     }
@@ -53,10 +53,10 @@ public class AnswerOptionEntity {
     }
 
     public QuestionEntity getQuestion() {
-        return questionEntity;
+        return question;
     }
 
-    public void setQuestion(QuestionEntity questionEntity) {
-        this.questionEntity = questionEntity;
+    public void setQuestion(QuestionEntity question) {
+        this.question = question;
     }
 }
