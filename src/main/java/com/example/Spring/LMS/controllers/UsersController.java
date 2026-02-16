@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/LMS/users")
 public class UsersController {
 
     private static final Logger log = LoggerFactory.getLogger(UsersController.class);

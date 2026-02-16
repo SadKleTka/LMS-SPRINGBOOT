@@ -9,12 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/LMS")
 public class RegistrationController {
 
     private static final Logger log = LoggerFactory.getLogger(RegistrationController.class);
@@ -26,7 +24,7 @@ public class RegistrationController {
     }
 
 
-    @PostMapping("/registration")
+    @PostMapping("/auth/registration")
     public ResponseEntity<UserToCreate> register(
             @RequestBody
             @Valid
@@ -39,7 +37,7 @@ public class RegistrationController {
 
     }
 
-    @PostMapping("/login")
+    @PostMapping("/auth/login")
     public ResponseEntity<UserResponse> login(
             @RequestBody
             @Valid
