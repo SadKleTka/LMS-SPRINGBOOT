@@ -57,12 +57,11 @@ public class CourseEntity {
         this.lessons = lessons;
     }
 
-    public CourseEntity(String name, String description, String category, CourseLevel level, UsersEntity teacher) {
+    public CourseEntity(String name, String description, String category, CourseLevel level) {
         this.name = name;
         this.description = description;
         this.category = category;
         this.level = level;
-        this.teacher = teacher;
     }
 
     public Long getId() {

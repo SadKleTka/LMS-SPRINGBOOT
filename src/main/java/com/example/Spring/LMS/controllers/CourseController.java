@@ -1,13 +1,15 @@
 package com.example.Spring.LMS.controllers;
 
-import com.example.Spring.LMS.DTO.CourseResponse;
+import com.example.Spring.LMS.CourseDTO.CourseResponse;
+import com.example.Spring.LMS.CourseDTO.CourseToCreate;
+import com.example.Spring.LMS.records.Course;
 import com.example.Spring.LMS.services.CoursesService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,4 +30,57 @@ public class CourseController {
         log.info("All courses has been initiated");
         return ResponseEntity.ok(service.getAllCourses());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CourseResponse> getCourseById(
+            @PathVariable Long id
+    ) {
+        log.info("Get course by id has been initiated");
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .body(service.getCourseById(id));
+
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<CourseToCreate> createCourse(
+            @RequestHeader("X-User-id") Long userId,
+            @RequestBody
+            @Valid
+            CourseToCreate course
+    ) {
+        log.info("Create course has been initiated");
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(service.createCourse(userId, course));
+    }
+
+    @PostMapping("/{id}/delete")
+    public ResponseEntity<Course> deleteCourseById(
+            @PathVariable Long id,
+            @RequestHeader("X-User-id") Long userId
+    ) {
+        log.info("Delete course by id has been initiated");
+
+        service.deleteCourseById(id, userId);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT)
+                .build();
+    }
+
+    @PutMapping("/{id}/edit")
+    public ResponseEntity<CourseToCreate> editCourseById(
+            @PathVariable Long id,
+            @RequestHeader("X-User-id") Long userId,
+            @RequestBody
+            @Valid
+            CourseToCreate course
+    ) {
+        log.info("Edit course by id has been initiated");
+
+        service.editCourseById(id, userId, course);
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .build();
+    }
+
 }

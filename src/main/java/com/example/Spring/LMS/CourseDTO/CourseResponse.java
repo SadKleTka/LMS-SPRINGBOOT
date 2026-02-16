@@ -1,7 +1,10 @@
-package com.example.Spring.LMS.DTO;
+package com.example.Spring.LMS.CourseDTO;
 
+
+import com.example.Spring.LMS.DTO.TeacherResponse;
 
 public record CourseResponse(
+        Long id,
         String name,
         String description,
         String category,
