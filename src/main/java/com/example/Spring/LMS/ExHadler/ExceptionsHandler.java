@@ -18,6 +18,22 @@ public class ExceptionsHandler {
 
     private static final Logger log = LoggerFactory.getLogger(ExceptionsHandler.class);
 
+    @ExceptionHandler(SecurityException.class)
+    public ResponseEntity handleSecurityException(
+            SecurityException e
+    ) {
+        log.error("Security Exception", e);
+
+        var error = new ErrorMessages(
+                "Password do not match requirements",
+                e.getMessage(),
+                LocalDateTime.now()
+        );
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(error);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity handleGlobalException(
             Exception e

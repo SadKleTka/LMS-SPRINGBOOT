@@ -31,7 +31,7 @@ public class UsersEntity {
     private LocalDateTime dateCreated;
 
     @OneToMany(mappedBy = "teacher", orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<CourseEntity> cours = new ArrayList<>();
+    private List<CourseEntity> course = new ArrayList<>();
 
     @OneToMany(mappedBy = "student", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<EnrollmentEntity> enrollmentEntities = new ArrayList<>();
@@ -61,7 +61,8 @@ public class UsersEntity {
     public UsersEntity() {}
 
 
-    public UsersEntity(String username, String email, String password, UserRole role) {
+    public UsersEntity(Long id, String username, String email, String password, UserRole role) {
+        this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -69,11 +70,11 @@ public class UsersEntity {
     }
 
     public List<CourseEntity> getCourses() {
-        return cours;
+        return course;
     }
 
     public void setCourses(List<CourseEntity> cours) {
-        this.cours = cours;
+        this.course = cours;
     }
 
     public Long getId() {
