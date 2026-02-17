@@ -27,10 +27,8 @@ public class TestEntity {
     }
     public TestEntity() {}
 
-    public TestEntity(String name, LessonEntity lessonEntity, List<QuestionEntity> questionEntities) {
+    public TestEntity(String name) {
         this.name = name;
-        this.lessons = lessonEntity;
-        this.questions = questionEntities;
     }
 
     public void setQuestions(List<QuestionEntity> questionEntities) {

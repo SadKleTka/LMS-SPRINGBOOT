@@ -24,7 +24,7 @@ public class QuestionEntity {
     private List<AnswerOptionEntity> answers = new ArrayList<>();
 
     public QuestionEntity() {}
-    public QuestionEntity(String text, TestEntity test) {
+    public QuestionEntity(String text) {
         this.text = text;
         this.test = test;
     }

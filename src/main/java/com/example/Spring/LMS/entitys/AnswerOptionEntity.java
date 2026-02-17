@@ -22,8 +22,7 @@ public class AnswerOptionEntity {
 
     public AnswerOptionEntity() {}
 
-    public AnswerOptionEntity(QuestionEntity question, String text, Boolean isCorrect) {
-        this.question = question;
+    public AnswerOptionEntity(String text, Boolean isCorrect) {
         this.text = text;
         this.isCorrect = isCorrect;
     }
