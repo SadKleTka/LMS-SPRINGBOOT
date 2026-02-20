@@ -1,4 +1,4 @@
-package com.example.Spring.LMS.records;
+package com.example.Spring.LMS.TestDTO;
 
 import com.example.Spring.LMS.entitys.AnswerOptionEntity;
 import com.example.Spring.LMS.entitys.TestEntity;

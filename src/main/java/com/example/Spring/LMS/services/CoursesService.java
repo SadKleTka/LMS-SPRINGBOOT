@@ -6,7 +6,7 @@ import com.example.Spring.LMS.DTO.TeacherResponse;
 import com.example.Spring.LMS.entitys.CourseEntity;
 import com.example.Spring.LMS.entitys.UsersEntity;
 import com.example.Spring.LMS.enums.UserRole;
-import com.example.Spring.LMS.records.Course;
+import com.example.Spring.LMS.CourseDTO.Course;
 import com.example.Spring.LMS.repositories.CourseRepository;
 import com.example.Spring.LMS.repositories.UsersRepository;
 import jakarta.persistence.EntityNotFoundException;

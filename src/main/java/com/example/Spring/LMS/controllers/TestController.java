@@ -1,7 +1,7 @@
 package com.example.Spring.LMS.controllers;
 
 import com.example.Spring.LMS.TestDTO.*;
-import com.example.Spring.LMS.records.Question;
+import com.example.Spring.LMS.TestDTO.Question;
 import com.example.Spring.LMS.services.TestsService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -9,8 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/LMS/course/{id}/lessons/{lessonId}/test")

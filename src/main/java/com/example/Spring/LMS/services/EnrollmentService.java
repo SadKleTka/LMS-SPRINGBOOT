@@ -10,7 +10,7 @@ import com.example.Spring.LMS.entitys.ProgressEntity;
 import com.example.Spring.LMS.entitys.UsersEntity;
 import com.example.Spring.LMS.enums.StatusOfProgress;
 import com.example.Spring.LMS.enums.UserRole;
-import com.example.Spring.LMS.records.Enrollment;
+import com.example.Spring.LMS.CourseDTO.Enrollment;
 import com.example.Spring.LMS.repositories.CourseRepository;
 import com.example.Spring.LMS.repositories.EnrollmentsRepository;
 import com.example.Spring.LMS.repositories.ProgressesRepository;
