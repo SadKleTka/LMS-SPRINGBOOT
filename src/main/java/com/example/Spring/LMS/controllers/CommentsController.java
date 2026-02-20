@@ -2,8 +2,8 @@ package com.example.Spring.LMS.controllers;
 
 import com.example.Spring.LMS.CourseDTO.CommentToCreate;
 import com.example.Spring.LMS.CourseDTO.CommentToResponse;
-import com.example.Spring.LMS.records.Comment;
 import com.example.Spring.LMS.services.CommentsService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -27,7 +27,9 @@ public class CommentsController {
     @PostMapping("/create")
     public ResponseEntity<CommentToResponse> createComment(
             @PathVariable Long id,
-            @RequestBody CommentToCreate comment,
+            @RequestBody
+            @Valid
+            CommentToCreate comment,
             @RequestHeader("X-User-id") Long userId
     ) {
         log.info("Received request to create comment");
