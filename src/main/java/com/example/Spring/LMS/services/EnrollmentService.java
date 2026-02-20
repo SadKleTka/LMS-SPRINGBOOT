@@ -5,15 +5,20 @@ import com.example.Spring.LMS.DTO.TeacherResponse;
 import com.example.Spring.LMS.DTO.UserResponse;
 import com.example.Spring.LMS.Exceptions.NoPermissionException;
 import com.example.Spring.LMS.entitys.EnrollmentEntity;
+import com.example.Spring.LMS.entitys.LessonEntity;
+import com.example.Spring.LMS.entitys.ProgressEntity;
 import com.example.Spring.LMS.entitys.UsersEntity;
+import com.example.Spring.LMS.enums.StatusOfProgress;
 import com.example.Spring.LMS.enums.UserRole;
 import com.example.Spring.LMS.records.Enrollment;
 import com.example.Spring.LMS.repositories.CourseRepository;
 import com.example.Spring.LMS.repositories.EnrollmentsRepository;
+import com.example.Spring.LMS.repositories.ProgressesRepository;
 import com.example.Spring.LMS.repositories.UsersRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,10 +31,13 @@ public class EnrollmentService {
 
     private final CourseRepository courseRepository;
 
-    public EnrollmentService(EnrollmentsRepository repository, UsersRepository usersRepository, CourseRepository courseRepository) {
+    private final ProgressesRepository progressesRepository;
+
+    public EnrollmentService(EnrollmentsRepository repository, UsersRepository usersRepository, CourseRepository courseRepository,  ProgressesRepository progressesRepository) {
         this.repository = repository;
         this.usersRepository = usersRepository;
         this.courseRepository = courseRepository;
+        this.progressesRepository = progressesRepository;
     }
 
     public Enrollment enrollToTheCourse(Long userId, Long courseId) {
@@ -51,6 +59,16 @@ public class EnrollmentService {
                 user,
                 course
         );
+
+        for (LessonEntity lesson : course.getLessons()) {
+            var newProgress = new ProgressEntity(
+                    LocalDateTime.now(),
+                    user,
+                    lesson,
+                    StatusOfProgress.FINISHED
+            );
+            progressesRepository.save(newProgress);
+        }
 
         var saved = repository.save(newEnrollment);
 
