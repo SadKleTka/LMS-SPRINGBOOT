@@ -1,7 +1,7 @@
 package com.example.Spring.LMS.TestDTO;
 
-import com.example.Spring.LMS.entitys.AnswerOptionEntity;
-import com.example.Spring.LMS.entitys.TestEntity;
+import com.example.Spring.LMS.entities.AnswerOptionEntity;
+import com.example.Spring.LMS.entities.TestEntity;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 

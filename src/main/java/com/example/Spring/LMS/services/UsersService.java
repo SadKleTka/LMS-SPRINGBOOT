@@ -1,7 +1,7 @@
 package com.example.Spring.LMS.services;
 
 import com.example.Spring.LMS.DTO.UserResponse;
-import com.example.Spring.LMS.entitys.UsersEntity;
+import com.example.Spring.LMS.entities.UsersEntity;
 import com.example.Spring.LMS.repositories.UsersRepository;
 import org.springframework.stereotype.Service;
 

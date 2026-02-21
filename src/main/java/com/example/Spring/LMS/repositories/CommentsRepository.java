@@ -1,7 +1,7 @@
 package com.example.Spring.LMS.repositories;
 
-import com.example.Spring.LMS.entitys.CommentEntity;
-import com.example.Spring.LMS.entitys.CourseEntity;
+import com.example.Spring.LMS.entities.CommentEntity;
+import com.example.Spring.LMS.entities.CourseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -1,4 +1,4 @@
-package com.example.Spring.LMS.entitys;
+package com.example.Spring.LMS.entities;
 
 import jakarta.persistence.*;
 

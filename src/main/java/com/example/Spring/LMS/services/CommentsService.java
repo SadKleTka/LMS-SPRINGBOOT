@@ -3,7 +3,7 @@ package com.example.Spring.LMS.services;
 import com.example.Spring.LMS.CourseDTO.CommentToCreate;
 import com.example.Spring.LMS.CourseDTO.CommentToResponse;
 import com.example.Spring.LMS.Exceptions.NoPermissionException;
-import com.example.Spring.LMS.entitys.CommentEntity;
+import com.example.Spring.LMS.entities.CommentEntity;
 import com.example.Spring.LMS.repositories.CommentsRepository;
 import com.example.Spring.LMS.repositories.CourseRepository;
 import com.example.Spring.LMS.repositories.UsersRepository;

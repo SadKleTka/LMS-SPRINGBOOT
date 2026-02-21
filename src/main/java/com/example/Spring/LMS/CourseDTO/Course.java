@@ -1,9 +1,9 @@
 package com.example.Spring.LMS.CourseDTO;
 
-import com.example.Spring.LMS.entitys.CommentEntity;
-import com.example.Spring.LMS.entitys.EnrollmentEntity;
-import com.example.Spring.LMS.entitys.LessonEntity;
-import com.example.Spring.LMS.entitys.UsersEntity;
+import com.example.Spring.LMS.entities.CommentEntity;
+import com.example.Spring.LMS.entities.EnrollmentEntity;
+import com.example.Spring.LMS.entities.LessonEntity;
+import com.example.Spring.LMS.entities.UsersEntity;
 import com.example.Spring.LMS.enums.CourseLevel;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;

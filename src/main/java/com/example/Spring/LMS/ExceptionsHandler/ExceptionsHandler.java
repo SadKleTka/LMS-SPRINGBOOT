@@ -1,4 +1,4 @@
-package com.example.Spring.LMS.ExHadler;
+package com.example.Spring.LMS.ExceptionsHandler;
 
 import com.example.Spring.LMS.DTO.ErrorMessages;
 import com.example.Spring.LMS.Exceptions.NoPermissionException;

@@ -3,7 +3,7 @@ package com.example.Spring.LMS.services;
 import com.example.Spring.LMS.Exceptions.NoPermissionException;
 import com.example.Spring.LMS.LessonDTO.LessonResponse;
 import com.example.Spring.LMS.TestDTO.*;
-import com.example.Spring.LMS.entitys.*;
+import com.example.Spring.LMS.entities.*;
 import com.example.Spring.LMS.repositories.*;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;

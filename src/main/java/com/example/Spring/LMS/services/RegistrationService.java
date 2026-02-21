@@ -3,7 +3,7 @@ package com.example.Spring.LMS.services;
 import com.example.Spring.LMS.DTO.UserResponse;
 import com.example.Spring.LMS.DTO.UserToCreate;
 import com.example.Spring.LMS.DTO.UserToLogin;
-import com.example.Spring.LMS.entitys.UsersEntity;
+import com.example.Spring.LMS.entities.UsersEntity;
 import jakarta.persistence.EntityNotFoundException;
 import org.mindrot.jbcrypt.BCrypt;
 import com.example.Spring.LMS.repositories.UsersRepository;

@@ -1,7 +1,7 @@
 package com.example.Spring.LMS.repositories;
 
-import com.example.Spring.LMS.entitys.LessonEntity;
-import com.example.Spring.LMS.entitys.TestEntity;
+import com.example.Spring.LMS.entities.LessonEntity;
+import com.example.Spring.LMS.entities.TestEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

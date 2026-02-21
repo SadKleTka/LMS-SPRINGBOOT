@@ -1,8 +1,8 @@
 package com.example.Spring.LMS.LessonDTO;
 
-import com.example.Spring.LMS.entitys.CourseEntity;
-import com.example.Spring.LMS.entitys.ProgressEntity;
-import com.example.Spring.LMS.entitys.TestEntity;
+import com.example.Spring.LMS.entities.CourseEntity;
+import com.example.Spring.LMS.entities.ProgressEntity;
+import com.example.Spring.LMS.entities.TestEntity;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 

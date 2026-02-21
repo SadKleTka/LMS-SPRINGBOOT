@@ -1,6 +1,6 @@
 package com.example.Spring.LMS.repositories;
 
-import com.example.Spring.LMS.entitys.CourseEntity;
+import com.example.Spring.LMS.entities.CourseEntity;
 import com.example.Spring.LMS.enums.CourseLevel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

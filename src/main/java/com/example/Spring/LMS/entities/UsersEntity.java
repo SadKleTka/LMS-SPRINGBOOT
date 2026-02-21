@@ -1,4 +1,4 @@
-package com.example.Spring.LMS.entitys;
+package com.example.Spring.LMS.entities;
 
 import com.example.Spring.LMS.enums.UserRole;
 import jakarta.persistence.*;
