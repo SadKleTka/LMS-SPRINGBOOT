@@ -1,11 +1,11 @@
 package com.example.Spring.LMS.mockAuthentification;
 
-import com.example.Spring.LMS.users.usersDto.UserResponse;
-import com.example.Spring.LMS.users.usersDto.UserToCreate;
+import com.example.Spring.LMS.users.dto.UserResponse;
+import com.example.Spring.LMS.users.dto.UserToCreate;
 import com.example.Spring.LMS.users.UsersEntity;
 import jakarta.persistence.EntityNotFoundException;
 import org.mindrot.jbcrypt.BCrypt;
-import com.example.Spring.LMS.repositories.UsersRepository;
+import com.example.Spring.LMS.users.UsersRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

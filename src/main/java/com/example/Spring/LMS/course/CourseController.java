@@ -1,8 +1,7 @@
 package com.example.Spring.LMS.course;
 
-import com.example.Spring.LMS.course.courseDto.CourseResponse;
-import com.example.Spring.LMS.course.courseDto.CourseToCreate;
-import com.example.Spring.LMS.course.courseDto.Course;
+import com.example.Spring.LMS.course.dto.CourseResponse;
+import com.example.Spring.LMS.course.dto.CourseToCreate;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +34,7 @@ public class CourseController {
             @PathVariable Long id
     ) {
         log.info("Get course by id has been initiated");
-        return ResponseEntity.status(HttpStatus.FOUND)
+        return ResponseEntity.status(HttpStatus.OK)
                 .body(service.getCourseById(id));
 
     }
@@ -54,7 +53,7 @@ public class CourseController {
     }
 
     @PostMapping("/{id}/delete")
-    public ResponseEntity<Course> deleteCourseById(
+    public ResponseEntity<CourseResponse> deleteCourseById(
             @PathVariable Long id,
             @RequestHeader("X-User-id") Long userId
     ) {

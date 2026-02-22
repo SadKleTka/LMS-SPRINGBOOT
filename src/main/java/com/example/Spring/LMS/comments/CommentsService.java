@@ -1,27 +1,28 @@
 package com.example.Spring.LMS.comments;
 
+import com.example.Spring.LMS.comments.dto.CommentToCreate;
+import com.example.Spring.LMS.comments.dto.CommentToResponse;
 import com.example.Spring.LMS.exceptions.NoPermissionException;
 import com.example.Spring.LMS.course.CourseRepository;
-import com.example.Spring.LMS.repositories.UsersRepository;
+import com.example.Spring.LMS.mapper.CommentMapper;
+import com.example.Spring.LMS.users.UsersRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CommentsService {
+
+    private final CommentMapper commentMapper;
 
     private final CommentsRepository repository;
 
     private final CourseRepository courseRepository;
 
     private final UsersRepository usersRepository;
-
-    public CommentsService(CommentsRepository repository, CourseRepository courseRepository, UsersRepository usersRepository) {
-        this.repository = repository;
-        this.courseRepository = courseRepository;
-        this.usersRepository = usersRepository;
-    }
 
     public CommentToResponse createComment(Long id, CommentToCreate comment, Long userId) {
         var course = courseRepository.findById(id).orElseThrow(()
@@ -30,11 +31,12 @@ public class CommentsService {
         var user = usersRepository.findById(userId).orElseThrow(()
                 -> new EntityNotFoundException("No user with id: " + userId));
 
-        var newComment = new CommentEntity(
-                comment.text(),
-                user,
-                course
-        );
+        var newComment = CommentEntity
+                .builder()
+                .text(comment.text())
+                .user(user)
+                .course(course)
+                .build();
 
         var userEnrollments = user.getEnrollments();
         byte count = 0;
@@ -49,7 +51,7 @@ public class CommentsService {
 
         var saved = repository.save(newComment);
 
-        return toDomainComment(saved);
+        return commentMapper.commentToResponse(saved);
     }
 
 
@@ -63,15 +65,7 @@ public class CommentsService {
             throw new EntityNotFoundException("No comments found");
         }
 
-        return comments.stream().map(this::toDomainComment).toList();
+        return comments.stream().map(commentMapper::commentToResponse).toList();
 
-    }
-
-    private CommentToResponse toDomainComment(CommentEntity comment) {
-        return new CommentToResponse(
-                comment.getUser().getUsername(),
-                comment.getText(),
-                comment.getCreatedAt()
-        );
     }
 }

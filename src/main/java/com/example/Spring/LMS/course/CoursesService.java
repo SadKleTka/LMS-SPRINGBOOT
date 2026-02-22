@@ -1,36 +1,34 @@
 package com.example.Spring.LMS.course;
 
-import com.example.Spring.LMS.course.courseDto.CourseResponse;
-import com.example.Spring.LMS.course.courseDto.CourseToCreate;
-import com.example.Spring.LMS.users.usersDto.TeacherResponse;
+import com.example.Spring.LMS.course.dto.CourseResponse;
+import com.example.Spring.LMS.course.dto.CourseToCreate;
+import com.example.Spring.LMS.mapper.CourseMapper;
 import com.example.Spring.LMS.users.UsersEntity;
 import com.example.Spring.LMS.enums.UserRole;
-import com.example.Spring.LMS.course.courseDto.Course;
-import com.example.Spring.LMS.repositories.UsersRepository;
+import com.example.Spring.LMS.users.UsersRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.example.Spring.LMS.exceptions.NoPermissionException;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CoursesService {
+
+    private final CourseMapper courseMapper;
 
     private final CourseRepository repository;
 
     private final UsersRepository userRepository;
 
-    public CoursesService(CourseRepository repository, UsersRepository userRepository) {
-        this.repository = repository;
-        this.userRepository = userRepository;
-    }
-
     public List<CourseResponse> getAllCourses() {
 
         List<CourseEntity> courses = repository.findAll();
 
-        return courses.stream().map(this::toResponse).toList();
+        return courses.stream().map(courseMapper::toResponse).toList();
     }
 
     public CourseResponse getCourseById(Long id) {
@@ -38,7 +36,7 @@ public class CoursesService {
                 -> new EntityNotFoundException("Course with id " + id + " not found")
         );
 
-        return toResponse(course);
+        return courseMapper.toResponse(course);
     }
 
     public CourseToCreate createCourse(Long id, CourseToCreate course) {
@@ -47,16 +45,16 @@ public class CoursesService {
         );
         checkIfTeacher(user);
 
-        var newCourse = new CourseEntity(
-                course.name(),
-                course.description(),
-                course.category(),
-                course.level()
-        );
+        var newCourse = CourseEntity.builder()
+                .name(course.name())
+                .description(course.description())
+                .category(course.category())
+                .level(course.level())
+                .build();
         newCourse.setTeacher(user);
 
         var saved = repository.save(newCourse);
-        return toCreateCourse(saved);
+        return courseMapper.toCourseToCreate(saved);
     }
 
     public void deleteCourseById(Long id, Long userId) {
@@ -100,42 +98,5 @@ public class CoursesService {
         }
     }
 
-    private CourseToCreate toCreateCourse(CourseEntity course) {
-        return new CourseToCreate(
-                course.getName(),
-                course.getDescription(),
-                course.getCategory(),
-                course.getLevel()
-        );
-    }
 
-    private CourseResponse toResponse(CourseEntity c) {
-        return new CourseResponse(
-                c.getId(),
-                c.getName(),
-                c.getDescription(),
-                c.getCategory(),
-                c.getLevel().name(),
-                new TeacherResponse(
-                        c.getTeacher().getUsername(),
-                        c.getTeacher().getEmail()
-                )
-        );
-    }
-
-
-
-    private Course toDomainCourse(CourseEntity course) {
-        return new Course(
-                course.getId(),
-                course.getName(),
-                course.getDescription(),
-                course.getCategory(),
-                course.getLevel(),
-                course.getTeacher(),
-                course.getLessons(),
-                course.getEnrollments(),
-                course.getComments()
-        );
-    }
 }

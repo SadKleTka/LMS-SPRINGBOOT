@@ -1,7 +1,6 @@
 package com.example.Spring.LMS.users;
 
-import com.example.Spring.LMS.users.usersDto.UserResponse;
-import com.example.Spring.LMS.repositories.UsersRepository;
+import com.example.Spring.LMS.users.dto.UserResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

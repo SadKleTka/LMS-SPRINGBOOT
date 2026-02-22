@@ -1,7 +1,7 @@
 package com.example.Spring.LMS.enrollments;
 
-import com.example.Spring.LMS.course.courseDto.CourseResponse;
-import com.example.Spring.LMS.enrollments.enrollmentsDto.Enrollment;
+import com.example.Spring.LMS.course.dto.CourseResponse;
+import com.example.Spring.LMS.enrollments.dto.Enrollment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

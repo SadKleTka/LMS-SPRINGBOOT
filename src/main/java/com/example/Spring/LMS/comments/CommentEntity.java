@@ -4,12 +4,19 @@ package com.example.Spring.LMS.comments;
 import com.example.Spring.LMS.course.CourseEntity;
 import com.example.Spring.LMS.users.UsersEntity;
 import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "comment")
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class CommentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,56 +37,4 @@ public class CommentEntity {
     @JoinColumn(name = "course_id", referencedColumnName = "id", nullable = false)
     private CourseEntity course;
 
-    public CommentEntity() {}
-
-    public CommentEntity(String text, UsersEntity student, CourseEntity course) {
-        this.text = text;
-        this.user = student;
-        this.course = course;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public UsersEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UsersEntity student) {
-        this.user = student;
-    }
-
-    public CourseEntity getCourse() {
-        return course;
-    }
-
-    public void setCourse(CourseEntity course) {
-        this.course = course;
-    }
-
-    @Override
-    public String toString() {
-        return getText();
-    }
 }

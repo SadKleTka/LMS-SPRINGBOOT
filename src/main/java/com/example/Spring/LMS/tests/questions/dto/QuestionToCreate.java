@@ -1,4 +1,4 @@
-package com.example.Spring.LMS.tests.questions.questionDto;
+package com.example.Spring.LMS.tests.questions.dto;
 
 import jakarta.validation.constraints.NotNull;
 

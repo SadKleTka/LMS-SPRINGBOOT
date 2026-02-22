@@ -1,11 +1,11 @@
-package com.example.Spring.LMS.users.usersDto;
+package com.example.Spring.LMS.users.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
 public record TeacherResponse(
         @NotNull
-        String name,
+        String username,
         @NotNull
         @Email
         String email

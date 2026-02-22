@@ -1,19 +1,18 @@
 package com.example.Spring.LMS.enrollments;
 
-import com.example.Spring.LMS.course.courseDto.CourseResponse;
-import com.example.Spring.LMS.users.usersDto.TeacherResponse;
-import com.example.Spring.LMS.users.usersDto.UserResponse;
+import com.example.Spring.LMS.course.dto.CourseResponse;
+import com.example.Spring.LMS.users.dto.TeacherResponse;
+import com.example.Spring.LMS.users.dto.UserResponse;
 import com.example.Spring.LMS.exceptions.NoPermissionException;
 import com.example.Spring.LMS.lesson.LessonEntity;
 import com.example.Spring.LMS.progresses.ProgressEntity;
 import com.example.Spring.LMS.users.UsersEntity;
 import com.example.Spring.LMS.enums.StatusOfProgress;
 import com.example.Spring.LMS.enums.UserRole;
-import com.example.Spring.LMS.enrollments.enrollmentsDto.Enrollment;
+import com.example.Spring.LMS.enrollments.dto.Enrollment;
 import com.example.Spring.LMS.course.CourseRepository;
-import com.example.Spring.LMS.repositories.EnrollmentsRepository;
-import com.example.Spring.LMS.repositories.ProgressesRepository;
-import com.example.Spring.LMS.repositories.UsersRepository;
+import com.example.Spring.LMS.progresses.ProgressesRepository;
+import com.example.Spring.LMS.users.UsersRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 

@@ -3,8 +3,7 @@ package com.example.Spring.LMS.progresses;
 import com.example.Spring.LMS.enums.StatusOfProgress;
 import com.example.Spring.LMS.enums.UserRole;
 import com.example.Spring.LMS.lesson.LessonsRepository;
-import com.example.Spring.LMS.repositories.ProgressesRepository;
-import com.example.Spring.LMS.repositories.UsersRepository;
+import com.example.Spring.LMS.users.UsersRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.example.Spring.LMS.lesson.lessonDto;
+package com.example.Spring.LMS.lesson.dto;
 
 import com.example.Spring.LMS.course.CourseEntity;
 import com.example.Spring.LMS.progresses.ProgressEntity;

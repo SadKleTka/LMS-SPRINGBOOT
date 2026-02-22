@@ -1,8 +1,8 @@
 package com.example.Spring.LMS.lesson;
 
 import com.example.Spring.LMS.exceptions.NoPermissionException;
-import com.example.Spring.LMS.lesson.lessonDto.LessonResponse;
-import com.example.Spring.LMS.lesson.lessonDto.LessonToCreate;
+import com.example.Spring.LMS.lesson.dto.LessonResponse;
+import com.example.Spring.LMS.lesson.dto.LessonToCreate;
 import com.example.Spring.LMS.course.CourseEntity;
 import com.example.Spring.LMS.course.CourseRepository;
 import jakarta.persistence.EntityNotFoundException;

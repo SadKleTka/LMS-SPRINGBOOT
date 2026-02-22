@@ -1,7 +1,7 @@
-package com.example.Spring.LMS.tests.test.testDto;
+package com.example.Spring.LMS.tests.test.dto;
 
-import com.example.Spring.LMS.lesson.lessonDto.LessonResponse;
-import com.example.Spring.LMS.tests.questions.questionDto.QuestionToAnswer;
+import com.example.Spring.LMS.lesson.dto.LessonResponse;
+import com.example.Spring.LMS.tests.questions.dto.QuestionToAnswer;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.List;

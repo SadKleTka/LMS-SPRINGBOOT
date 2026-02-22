@@ -1,9 +1,9 @@
 package com.example.Spring.LMS.tests.test;
 
-import com.example.Spring.LMS.tests.answers.answersDto.AnswersToAnswer;
-import com.example.Spring.LMS.tests.questions.questionDto.Question;
-import com.example.Spring.LMS.tests.questions.questionDto.QuestionToCreate;
-import com.example.Spring.LMS.tests.test.testDto.*;
+import com.example.Spring.LMS.tests.answers.dto.AnswersToAnswer;
+import com.example.Spring.LMS.tests.questions.dto.Question;
+import com.example.Spring.LMS.tests.questions.dto.QuestionToCreate;
+import com.example.Spring.LMS.tests.test.dto.*;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

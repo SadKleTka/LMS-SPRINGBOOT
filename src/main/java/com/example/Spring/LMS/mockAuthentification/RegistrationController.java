@@ -1,7 +1,7 @@
 package com.example.Spring.LMS.mockAuthentification;
 
-import com.example.Spring.LMS.users.usersDto.UserResponse;
-import com.example.Spring.LMS.users.usersDto.UserToCreate;
+import com.example.Spring.LMS.users.dto.UserResponse;
+import com.example.Spring.LMS.users.dto.UserToCreate;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

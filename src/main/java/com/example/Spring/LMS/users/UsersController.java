@@ -1,6 +1,6 @@
 package com.example.Spring.LMS.users;
 
-import com.example.Spring.LMS.users.usersDto.UserResponse;
+import com.example.Spring.LMS.users.dto.UserResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
