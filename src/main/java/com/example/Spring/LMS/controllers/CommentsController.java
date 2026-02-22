@@ -1,7 +1,7 @@
 package com.example.Spring.LMS.controllers;
 
-import com.example.Spring.LMS.CourseDTO.CommentToCreate;
-import com.example.Spring.LMS.CourseDTO.CommentToResponse;
+import com.example.Spring.LMS.dto.courseDto.CommentToCreate;
+import com.example.Spring.LMS.dto.courseDto.CommentToResponse;
 import com.example.Spring.LMS.services.CommentsService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;

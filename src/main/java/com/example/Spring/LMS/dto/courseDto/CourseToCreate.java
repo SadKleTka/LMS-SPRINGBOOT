@@ -1,4 +1,4 @@
-package com.example.Spring.LMS.CourseDTO;
+package com.example.Spring.LMS.dto.courseDto;
 
 import com.example.Spring.LMS.enums.CourseLevel;
 import jakarta.validation.constraints.NotNull;

@@ -1,6 +1,6 @@
 package com.example.Spring.LMS.services;
 
-import com.example.Spring.LMS.CourseDTO.ProgressToResponse;
+import com.example.Spring.LMS.dto.courseDto.ProgressToResponse;
 import com.example.Spring.LMS.entities.ProgressEntity;
 import com.example.Spring.LMS.enums.StatusOfProgress;
 import com.example.Spring.LMS.enums.UserRole;

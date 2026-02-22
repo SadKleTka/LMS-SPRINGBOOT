@@ -1,7 +1,6 @@
 package com.example.Spring.LMS.controllers;
 
-import com.example.Spring.LMS.TestDTO.*;
-import com.example.Spring.LMS.TestDTO.Question;
+import com.example.Spring.LMS.dto.testDto.*;
 import com.example.Spring.LMS.services.TestsService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;

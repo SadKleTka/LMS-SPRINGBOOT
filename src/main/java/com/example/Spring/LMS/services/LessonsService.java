@@ -1,8 +1,8 @@
 package com.example.Spring.LMS.services;
 
-import com.example.Spring.LMS.Exceptions.NoPermissionException;
-import com.example.Spring.LMS.LessonDTO.LessonResponse;
-import com.example.Spring.LMS.LessonDTO.LessonToCreate;
+import com.example.Spring.LMS.exceptions.NoPermissionException;
+import com.example.Spring.LMS.dto.lessonDto.LessonResponse;
+import com.example.Spring.LMS.dto.lessonDto.LessonToCreate;
 import com.example.Spring.LMS.entities.CourseEntity;
 import com.example.Spring.LMS.entities.LessonEntity;
 import com.example.Spring.LMS.repositories.CourseRepository;

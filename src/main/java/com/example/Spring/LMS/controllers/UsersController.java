@@ -1,6 +1,6 @@
 package com.example.Spring.LMS.controllers;
 
-import com.example.Spring.LMS.DTO.UserResponse;
+import com.example.Spring.LMS.dto.UserResponse;
 import com.example.Spring.LMS.services.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

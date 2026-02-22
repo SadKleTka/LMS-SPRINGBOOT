@@ -1,4 +1,4 @@
-package com.example.Spring.LMS.CourseDTO;
+package com.example.Spring.LMS.dto.courseDto;
 
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;

@@ -1,4 +1,4 @@
-package com.example.Spring.LMS.DTO;
+package com.example.Spring.LMS.dto;
 
 import com.example.Spring.LMS.enums.UserRole;
 import jakarta.validation.constraints.Email;

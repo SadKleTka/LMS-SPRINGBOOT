@@ -1,4 +1,4 @@
-package com.example.Spring.LMS.DTO;
+package com.example.Spring.LMS.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;

@@ -1,4 +1,4 @@
-package com.example.Spring.LMS.Exceptions;
+package com.example.Spring.LMS.exceptions;
 
 
 public class NoPermissionException extends RuntimeException {

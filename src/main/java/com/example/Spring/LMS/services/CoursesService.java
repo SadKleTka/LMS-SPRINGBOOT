@@ -1,18 +1,18 @@
 package com.example.Spring.LMS.services;
 
-import com.example.Spring.LMS.CourseDTO.CourseResponse;
-import com.example.Spring.LMS.CourseDTO.CourseToCreate;
-import com.example.Spring.LMS.DTO.TeacherResponse;
+import com.example.Spring.LMS.dto.courseDto.CourseResponse;
+import com.example.Spring.LMS.dto.courseDto.CourseToCreate;
+import com.example.Spring.LMS.dto.TeacherResponse;
 import com.example.Spring.LMS.entities.CourseEntity;
 import com.example.Spring.LMS.entities.UsersEntity;
 import com.example.Spring.LMS.enums.UserRole;
-import com.example.Spring.LMS.CourseDTO.Course;
+import com.example.Spring.LMS.dto.courseDto.Course;
 import com.example.Spring.LMS.repositories.CourseRepository;
 import com.example.Spring.LMS.repositories.UsersRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-import com.example.Spring.LMS.Exceptions.NoPermissionException;
+import com.example.Spring.LMS.exceptions.NoPermissionException;
 
 import java.util.List;
 

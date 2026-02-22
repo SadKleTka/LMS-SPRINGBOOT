@@ -1,16 +1,16 @@
 package com.example.Spring.LMS.services;
 
-import com.example.Spring.LMS.CourseDTO.CourseResponse;
-import com.example.Spring.LMS.DTO.TeacherResponse;
-import com.example.Spring.LMS.DTO.UserResponse;
-import com.example.Spring.LMS.Exceptions.NoPermissionException;
+import com.example.Spring.LMS.dto.courseDto.CourseResponse;
+import com.example.Spring.LMS.dto.TeacherResponse;
+import com.example.Spring.LMS.dto.UserResponse;
+import com.example.Spring.LMS.exceptions.NoPermissionException;
 import com.example.Spring.LMS.entities.EnrollmentEntity;
 import com.example.Spring.LMS.entities.LessonEntity;
 import com.example.Spring.LMS.entities.ProgressEntity;
 import com.example.Spring.LMS.entities.UsersEntity;
 import com.example.Spring.LMS.enums.StatusOfProgress;
 import com.example.Spring.LMS.enums.UserRole;
-import com.example.Spring.LMS.CourseDTO.Enrollment;
+import com.example.Spring.LMS.dto.courseDto.Enrollment;
 import com.example.Spring.LMS.repositories.CourseRepository;
 import com.example.Spring.LMS.repositories.EnrollmentsRepository;
 import com.example.Spring.LMS.repositories.ProgressesRepository;

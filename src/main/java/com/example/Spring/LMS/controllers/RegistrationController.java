@@ -1,8 +1,8 @@
 package com.example.Spring.LMS.controllers;
 
-import com.example.Spring.LMS.DTO.UserResponse;
-import com.example.Spring.LMS.DTO.UserToCreate;
-import com.example.Spring.LMS.DTO.UserToLogin;
+import com.example.Spring.LMS.dto.UserResponse;
+import com.example.Spring.LMS.dto.UserToCreate;
+import com.example.Spring.LMS.dto.UserToLogin;
 import com.example.Spring.LMS.services.RegistrationService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;

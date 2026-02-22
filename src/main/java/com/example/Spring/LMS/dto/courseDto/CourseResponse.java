@@ -1,7 +1,7 @@
-package com.example.Spring.LMS.CourseDTO;
+package com.example.Spring.LMS.dto.courseDto;
 
 
-import com.example.Spring.LMS.DTO.TeacherResponse;
+import com.example.Spring.LMS.dto.TeacherResponse;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 

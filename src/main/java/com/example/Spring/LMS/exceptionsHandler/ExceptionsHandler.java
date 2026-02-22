@@ -1,7 +1,7 @@
-package com.example.Spring.LMS.ExceptionsHandler;
+package com.example.Spring.LMS.exceptionsHandler;
 
-import com.example.Spring.LMS.DTO.ErrorMessages;
-import com.example.Spring.LMS.Exceptions.NoPermissionException;
+import com.example.Spring.LMS.dto.ErrorMessages;
+import com.example.Spring.LMS.exceptions.NoPermissionException;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

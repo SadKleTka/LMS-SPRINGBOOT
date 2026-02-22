@@ -1,8 +1,8 @@
 package com.example.Spring.LMS.controllers;
 
-import com.example.Spring.LMS.CourseDTO.CourseResponse;
-import com.example.Spring.LMS.CourseDTO.CourseToCreate;
-import com.example.Spring.LMS.CourseDTO.Course;
+import com.example.Spring.LMS.dto.courseDto.CourseResponse;
+import com.example.Spring.LMS.dto.courseDto.CourseToCreate;
+import com.example.Spring.LMS.dto.courseDto.Course;
 import com.example.Spring.LMS.services.CoursesService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
