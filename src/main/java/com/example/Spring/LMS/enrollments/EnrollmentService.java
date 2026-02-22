@@ -1,6 +1,7 @@
 package com.example.Spring.LMS.enrollments;
 
 import com.example.Spring.LMS.course.dto.CourseResponse;
+import com.example.Spring.LMS.mapper.EnrollmentMapper;
 import com.example.Spring.LMS.users.dto.TeacherResponse;
 import com.example.Spring.LMS.users.dto.UserResponse;
 import com.example.Spring.LMS.exceptions.NoPermissionException;
@@ -14,6 +15,7 @@ import com.example.Spring.LMS.course.CourseRepository;
 import com.example.Spring.LMS.progresses.ProgressesRepository;
 import com.example.Spring.LMS.users.UsersRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -21,7 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class EnrollmentService {
+
+    private final EnrollmentMapper enrollmentMapper;
 
     private final EnrollmentsRepository repository;
 
@@ -31,12 +36,6 @@ public class EnrollmentService {
 
     private final ProgressesRepository progressesRepository;
 
-    public EnrollmentService(EnrollmentsRepository repository, UsersRepository usersRepository, CourseRepository courseRepository,  ProgressesRepository progressesRepository) {
-        this.repository = repository;
-        this.usersRepository = usersRepository;
-        this.courseRepository = courseRepository;
-        this.progressesRepository = progressesRepository;
-    }
 
     public Enrollment enrollToTheCourse(Long userId, Long courseId) {
         var user = usersRepository.findById(userId).orElseThrow(()
@@ -53,10 +52,10 @@ public class EnrollmentService {
             }
         }
 
-        var newEnrollment = new EnrollmentEntity(
-                user,
-                course
-        );
+        var newEnrollment = EnrollmentEntity.builder()
+                .student(user)
+                .course(course)
+                .build();
 
         for (LessonEntity lesson : course.getLessons()) {
             var newProgress = new ProgressEntity(
@@ -70,7 +69,7 @@ public class EnrollmentService {
 
         var saved = repository.save(newEnrollment);
 
-        return toDomainEnrollment(saved);
+        return enrollmentMapper.toResponse(saved);
     }
 
     public List<CourseResponse> getStudentsCourses(Long userId) {
@@ -85,7 +84,7 @@ public class EnrollmentService {
 
         List<CourseResponse> courses = new ArrayList<>();
         for (var enrollment : enrollments) {
-            courses.add(toDomainCourse(enrollment));
+            courses.add(enrollmentMapper.toCourseResponse(enrollment));
         }
 
         return courses;
@@ -95,36 +94,5 @@ public class EnrollmentService {
         if (user.getRole() != UserRole.STUDENT) {
             throw new NoPermissionException("You are not allowed to perform this action!");
         }
-    }
-
-    private Enrollment toDomainEnrollment(EnrollmentEntity enrollmentEntity) {
-        return new Enrollment(
-                enrollmentEntity.getId(),
-                enrollmentEntity.getDateEnrollment(),
-                toDomainUser(enrollmentEntity.getStudent()),
-                toDomainCourse(enrollmentEntity)
-        );
-    }
-
-    private UserResponse toDomainUser(UsersEntity user) {
-        return new UserResponse(
-                user.getId(),
-                user.getUsername(),
-                user.getRole()
-        );
-    }
-
-    private CourseResponse toDomainCourse(EnrollmentEntity enrollment) {
-        return new CourseResponse(
-                enrollment.getCourse().getId(),
-                enrollment.getCourse().getName(),
-                enrollment.getCourse().getDescription(),
-                enrollment.getCourse().getCategory(),
-                enrollment.getCourse().getLevel().name(),
-                new TeacherResponse(
-                        enrollment.getCourse().getTeacher().getUsername(),
-                        enrollment.getCourse().getTeacher().getEmail()
-                )
-        );
     }
 }
