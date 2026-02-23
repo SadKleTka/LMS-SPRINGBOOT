@@ -3,27 +3,26 @@ package com.example.Spring.LMS.progresses;
 import com.example.Spring.LMS.enums.StatusOfProgress;
 import com.example.Spring.LMS.enums.UserRole;
 import com.example.Spring.LMS.lesson.LessonsRepository;
+import com.example.Spring.LMS.mapper.ProgressMapper;
 import com.example.Spring.LMS.users.UsersRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ProgressService {
+
+    private final ProgressMapper progressMapper;
 
     private final LessonsRepository lessonsRepository;
 
     private final ProgressesRepository repository;
 
     private final UsersRepository usersRepository;
-
-    public ProgressService(ProgressesRepository repository, UsersRepository usersRepository, LessonsRepository lessonsRepository) {
-        this.repository = repository;
-        this.usersRepository = usersRepository;
-        this.lessonsRepository = lessonsRepository;
-    }
 
     public void completeLesson(Long id, Long userId) {
         var user = usersRepository.findById(userId).orElseThrow(()
@@ -39,7 +38,7 @@ public class ProgressService {
         var progresses = user.getStudentsProgress();
         byte count = 0;
         for (ProgressEntity progress : progresses) {
-            if (!progress.getLesson().getId().equals(lesson.getId())) {
+            if (!progress.getLessons().getId().equals(lesson.getId())) {
                 count++;
             }
             if (count == progresses.size()) {
@@ -47,12 +46,12 @@ public class ProgressService {
             }
         }
 
-        var newProgress = new ProgressEntity(
-                LocalDateTime.now(),
-                user,
-                lesson,
-                StatusOfProgress.FINISHED
-        );
+        var newProgress = ProgressEntity.builder()
+                .completedAt(LocalDateTime.now())
+                .student(user)
+                .lessons(lesson)
+                .status(StatusOfProgress.FINISHED)
+                        .build();
 
         repository.save(newProgress);
     }
@@ -67,15 +66,7 @@ public class ProgressService {
             throw new IllegalStateException("Student has not enrolled to any courses");
         }
 
-        return progresses.stream().map(this::toDomain).toList();
+        return progresses.stream().map(progressMapper::toResponse).toList();
     }
 
-    private ProgressToResponse toDomain(ProgressEntity entity) {
-        return new ProgressToResponse(
-                entity.getLesson().getName(),
-                entity.getStudent().getUsername(),
-                entity.getStatus(),
-                entity.getCompletedAt()
-        );
-    }
 }

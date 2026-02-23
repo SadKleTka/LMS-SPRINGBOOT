@@ -4,6 +4,7 @@ package com.example.Spring.LMS.progresses;
 import com.example.Spring.LMS.lesson.LessonEntity;
 import com.example.Spring.LMS.users.UsersEntity;
 import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import com.example.Spring.LMS.enums.StatusOfProgress;
 
@@ -11,6 +12,12 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "progress")
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ProgressEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,52 +39,4 @@ public class ProgressEntity {
     @JoinColumn(name = "lesson_id", referencedColumnName = "id", nullable = false)
     private LessonEntity lessons;
 
-    public ProgressEntity(LocalDateTime completedAt, UsersEntity student, LessonEntity lessonEntity, StatusOfProgress status) {
-        this.completedAt = completedAt;
-        this.student = student;
-        this.lessons = lessonEntity;
-        this.status = status;
-    }
-
-    public StatusOfProgress getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusOfProgress status) {
-        this.status = status;
-    }
-
-    public ProgressEntity() {}
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getCompletedAt() {
-        return completedAt;
-    }
-
-    public void setCompletedAt(LocalDateTime completedAt) {
-        this.completedAt = completedAt;
-    }
-
-    public UsersEntity getStudent() {
-        return student;
-    }
-
-    public void setStudent(UsersEntity student) {
-        this.student = student;
-    }
-
-    public LessonEntity getLesson() {
-        return lessons;
-    }
-
-    public void setLesson(LessonEntity lessonEntity) {
-        this.lessons = lessonEntity;
-    }
 }

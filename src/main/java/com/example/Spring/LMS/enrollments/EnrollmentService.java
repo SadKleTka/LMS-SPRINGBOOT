@@ -58,12 +58,12 @@ public class EnrollmentService {
                 .build();
 
         for (LessonEntity lesson : course.getLessons()) {
-            var newProgress = new ProgressEntity(
-                    LocalDateTime.now(),
-                    user,
-                    lesson,
-                    StatusOfProgress.FINISHED
-            );
+            var newProgress = ProgressEntity.builder()
+                    .completedAt(LocalDateTime.now())
+                    .student(user)
+                    .lessons(lesson)
+                    .status(StatusOfProgress.FINISHED)
+                    .build();
             progressesRepository.save(newProgress);
         }
 
