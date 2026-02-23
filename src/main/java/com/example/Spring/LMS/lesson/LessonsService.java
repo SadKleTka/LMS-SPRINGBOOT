@@ -5,23 +5,23 @@ import com.example.Spring.LMS.lesson.dto.LessonResponse;
 import com.example.Spring.LMS.lesson.dto.LessonToCreate;
 import com.example.Spring.LMS.course.CourseEntity;
 import com.example.Spring.LMS.course.CourseRepository;
+import com.example.Spring.LMS.mapper.LessonMapper;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class LessonsService {
+
+    private final LessonMapper lessonMapper;
 
     private final LessonsRepository repository;
 
     private final CourseRepository courseRepository;
-
-    public LessonsService(LessonsRepository repository, CourseRepository courseRepository) {
-        this.repository = repository;
-        this.courseRepository = courseRepository;
-    }
 
     public void deleteLessonById(Long id, Long lessonId, Long userId) {
         var course = courseRepository.findById(id).orElseThrow(()
@@ -38,7 +38,7 @@ public class LessonsService {
         );
         checkIfHasRights(course, userId);
 
-        repository.findById(id).orElseThrow(()
+        repository.findById(lessonId).orElseThrow(()
                 -> new EntityNotFoundException("Lesson with id " + lessonId + " not found"));
 
         repository.updateLesson(
@@ -59,7 +59,7 @@ public class LessonsService {
 
         checkIfHasRights(course, userId);
 
-        return toDomainLesson(lesson);
+        return lessonMapper.toResponse(lesson);
     }
 
     public LessonResponse createLesson(Long id, LessonToCreate lesson, Long userId) {
@@ -71,15 +71,15 @@ public class LessonsService {
             throw new IllegalStateException("You have to put real website");
         }
 
-        var newLesson = new LessonEntity(
-                lesson.name(),
-                lesson.content(),
-                lesson.videoUrl(),
-                course
-        );
+        var newLesson = LessonEntity.builder()
+                .name(lesson.name())
+                .content(lesson.content())
+                .videoUrl(lesson.videoUrl())
+                .course(course)
+                .build();
 
         var saved = repository.save(newLesson);
-        return toDomainLesson(saved);
+        return lessonMapper.toResponse(saved);
 
     }
 
@@ -91,7 +91,7 @@ public class LessonsService {
 
         List<LessonEntity> lessons = course.getLessons();
 
-        return lessons.stream().map(this::toDomainLesson).toList();
+        return lessons.stream().map(lessonMapper::toResponse).toList();
     }
 
     private void checkIfHasRights(CourseEntity course, Long id) {
@@ -100,12 +100,4 @@ public class LessonsService {
         }
     }
 
-    private LessonResponse toDomainLesson(LessonEntity lessonEntity) {
-        return new LessonResponse(
-                lessonEntity.getId(),
-                lessonEntity.getName(),
-                lessonEntity.getContent(),
-                lessonEntity.getVideoUrl()
-        );
-    }
 }

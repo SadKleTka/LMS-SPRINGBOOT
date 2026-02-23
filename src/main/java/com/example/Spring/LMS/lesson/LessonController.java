@@ -2,7 +2,6 @@ package com.example.Spring.LMS.lesson;
 
 import com.example.Spring.LMS.lesson.dto.LessonResponse;
 import com.example.Spring.LMS.lesson.dto.LessonToCreate;
-import com.example.Spring.LMS.lesson.dto.Lesson;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +24,7 @@ public class LessonController {
     }
 
     @PostMapping("/{id}/lessons/{lessonId}/delete")
-    public ResponseEntity<Lesson> deleteLessonById(
+    public ResponseEntity<?> deleteLessonById(
             @PathVariable Long id,
             @PathVariable Long lessonId,
             @RequestHeader("X-User-id") Long userId

@@ -5,12 +5,19 @@ import com.example.Spring.LMS.course.CourseEntity;
 import com.example.Spring.LMS.progresses.ProgressEntity;
 import com.example.Spring.LMS.tests.test.TestEntity;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "lesson")
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class LessonEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,68 +42,4 @@ public class LessonEntity {
     @OneToMany(mappedBy = "lessons", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<ProgressEntity> studentsProgress = new ArrayList<>();
 
-    public List<ProgressEntity> getStudentsProgress() {
-        return studentsProgress;
-    }
-
-    public void setStudentsProgress(List<ProgressEntity> studentsProgressEntities) {
-        this.studentsProgress = studentsProgressEntities;
-    }
-
-    public LessonEntity() {}
-
-    public TestEntity getTest() {
-        return test;
-    }
-
-    public void setTest(TestEntity test) {
-        this.test = test;
-    }
-
-    public LessonEntity(String name, String content, String videoUrl, CourseEntity courseEntity) {
-        this.name = name;
-        this.content = content;
-        this.videoUrl = videoUrl;
-        this.course = courseEntity;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getVideoUrl() {
-        return videoUrl;
-    }
-
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
-    }
-
-    public CourseEntity getCourse() {
-        return course;
-    }
-
-    public void setCourse(CourseEntity courseEntity) {
-        this.course = courseEntity;
-    }
 }
