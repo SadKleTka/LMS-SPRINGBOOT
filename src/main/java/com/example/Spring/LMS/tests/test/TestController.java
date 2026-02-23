@@ -1,7 +1,6 @@
 package com.example.Spring.LMS.tests.test;
 
 import com.example.Spring.LMS.tests.answers.dto.AnswersToAnswer;
-import com.example.Spring.LMS.tests.questions.dto.Question;
 import com.example.Spring.LMS.tests.questions.dto.QuestionToCreate;
 import com.example.Spring.LMS.tests.test.dto.*;
 import jakarta.validation.Valid;
@@ -24,7 +23,7 @@ public class TestController {
     }
 
     @PostMapping("/questions/{questionId}/delete")
-    public ResponseEntity<Question> deleteQuestion(
+    public ResponseEntity<?> deleteQuestion(
             @PathVariable Long id,
             @PathVariable Long lessonId,
             @RequestHeader("X-User-id") Long userId,

@@ -3,26 +3,27 @@ package com.example.Spring.LMS.tests.test;
 import com.example.Spring.LMS.course.CourseEntity;
 import com.example.Spring.LMS.course.CourseRepository;
 import com.example.Spring.LMS.exceptions.NoPermissionException;
-import com.example.Spring.LMS.lesson.LessonEntity;
 import com.example.Spring.LMS.lesson.LessonsRepository;
-import com.example.Spring.LMS.lesson.dto.LessonResponse;
+import com.example.Spring.LMS.mapper.TestMapper;
 import com.example.Spring.LMS.tests.answers.AnswerOptionEntity;
 import com.example.Spring.LMS.tests.answers.AnswersRepository;
 import com.example.Spring.LMS.tests.answers.dto.AnswersToAnswer;
 import com.example.Spring.LMS.tests.questions.QuestionEntity;
 import com.example.Spring.LMS.tests.questions.QuestionsRepository;
-import com.example.Spring.LMS.tests.questions.dto.QuestionToAnswer;
 import com.example.Spring.LMS.tests.questions.dto.QuestionToCreate;
 import com.example.Spring.LMS.tests.test.dto.*;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class TestsService {
+
+    private final TestMapper testMapper;
 
     private final TestsRepository repository;
 
@@ -34,13 +35,6 @@ public class TestsService {
 
     private final AnswersRepository answersRepository;
 
-    public TestsService(TestsRepository repository, CourseRepository courseRepository, LessonsRepository lessonsRepository, QuestionsRepository questionsRepository, AnswersRepository answersRepository) {
-        this.repository = repository;
-        this.courseRepository = courseRepository;
-        this.lessonsRepository = lessonsRepository;
-        this.questionsRepository = questionsRepository;
-        this.answersRepository = answersRepository;
-    }
 
     public void deleteQuestion(Long id, Long lessonId, Long userId, Long questionId) {
         var course = courseRepository.findById(id).orElseThrow(()
@@ -81,7 +75,7 @@ public class TestsService {
 
         var saved = answersRepository.save(newAnswer);
 
-        return toDomainAnswer(saved);
+        return testMapper.toAnswerResponse(saved);
     }
 
     public QuestionToCreate createQuestion(Long id, Long lessonId, QuestionToCreate question, Long userId) {
@@ -98,14 +92,14 @@ public class TestsService {
             throw new IllegalStateException("Lesson doesn't have a test!");
         }
 
-        var newQuestion = new QuestionEntity(
-                question.name()
-        );
-        newQuestion.setTest(test);
+        var newQuestion = QuestionEntity.builder()
+                .text(question.name())
+                .test(test)
+                .build();
 
         var saved = questionsRepository.save(newQuestion);
 
-        return toDomainQuestion(saved);
+        return testMapper.toQuestionResponse(saved);
     }
 
     @Transactional
@@ -140,14 +134,14 @@ public class TestsService {
             throw new IllegalStateException("Test already exists!");
         }
 
-        var newTest = new TestEntity(
-                testToCreate.name()
-        );
-        newTest.setLessons(lesson);
+        var newTest = TestEntity.builder()
+                .name(testToCreate.name())
+                .lessons(lesson)
+                .build();
 
         var saved = repository.save(newTest);
 
-        return toDomainTest(saved);
+        return testMapper.toResponse(saved);
     }
 
     public Test getTest(Long lessonId) {
@@ -159,7 +153,7 @@ public class TestsService {
             throw new EntityNotFoundException("Lesson with id: " + lesson.getId() + " has no tests!");
         }
 
-        return toDomainTest(test);
+        return testMapper.toResponse(test);
     }
 
 
@@ -169,75 +163,22 @@ public class TestsService {
         }
     }
 
-    private Test toDomainTest(TestEntity test) {
-        return new Test(
-                test.getName(),
-                toDomainLesson(test.getLessons()),
-                toDomainQuestions(test.getQuestions().stream().toList())
-        );
-    }
-
-    private LessonResponse toDomainLesson(LessonEntity lessonEntity) {
-        return new LessonResponse(
-                lessonEntity.getId(),
-                lessonEntity.getName(),
-                lessonEntity.getContent(),
-                lessonEntity.getVideoUrl()
-        );
-    }
-
-    private List<QuestionToAnswer> toDomainQuestions(List<QuestionEntity> questions) {
-        List<QuestionToAnswer> questionToAnswers = new ArrayList<>();
-        for (QuestionEntity question : questions) {
-            questionToAnswers.add(new QuestionToAnswer(
-                    question.getId(),
-                    question.getText(),
-                    toDomainAnswers(question.getAnswers())
-            ));
-        }
-        return questionToAnswers;
-    }
-
-    private QuestionToCreate toDomainQuestion(QuestionEntity questionEntity) {
-        return new QuestionToCreate(
-                questionEntity.getText()
-        );
-    }
-
-    private List<AnswersToAnswer> toDomainAnswers(List<AnswerOptionEntity> answers) {
-        List<AnswersToAnswer> answersToAnswers = new ArrayList<>();
-        for (AnswerOptionEntity answerOption : answers) {
-            answersToAnswers.add(new AnswersToAnswer(
-                    answerOption.getText(),
-                    answerOption.getCorrect()
-            ));
-        }
-        return answersToAnswers;
-    }
-
-    private AnswersToAnswer toDomainAnswer(AnswerOptionEntity answerOptionEntity) {
-        return new AnswersToAnswer(
-                answerOptionEntity.getText(),
-                answerOptionEntity.getCorrect()
-        );
-    }
-
     private static AnswerOptionEntity getAnswerOptionEntity(AnswersToAnswer answer, QuestionEntity question) {
         List<AnswerOptionEntity> answers = question.getAnswers();
         if (answers.size() == 4) {
             throw new IllegalStateException("Question cannot have more than 4 answers!");
         }
 
-        var newAnswer = new AnswerOptionEntity(
-                answer.text(),
-                answer.isCorrect()
-        );
-        newAnswer.setQuestion(question);
+        var newAnswer = AnswerOptionEntity.builder()
+                .text(answer.text())
+                .isCorrect(answer.isCorrect())
+                .question(question)
+                .build();
 
         if (!answers.isEmpty()) {
             for (AnswerOptionEntity answerOptionEntity : answers) {
-                if (answerOptionEntity.getCorrect()) {
-                    if (newAnswer.getCorrect()) {
+                if (answerOptionEntity.getIsCorrect()) {
+                    if (newAnswer.getIsCorrect()) {
                         throw new IllegalStateException("Question cannot have more than 1 right answers!");
                     }
                 }
