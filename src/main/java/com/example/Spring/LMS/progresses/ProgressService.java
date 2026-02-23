@@ -35,7 +35,7 @@ public class ProgressService {
         var lesson = lessonsRepository.findById(id).orElseThrow(()
                 -> new EntityNotFoundException("Lesson not found"));
 
-        var progresses = user.getStudentsProgress();
+        var progresses = user.getStudentsProgressEntities();
         byte count = 0;
         for (ProgressEntity progress : progresses) {
             if (!progress.getLessons().getId().equals(lesson.getId())) {
@@ -60,7 +60,7 @@ public class ProgressService {
         var user = usersRepository.findById(id).orElseThrow(()
                 -> new EntityNotFoundException("User not found with id " + id));
 
-        var progresses = user.getStudentsProgress();
+        var progresses = user.getStudentsProgressEntities();
 
         if (progresses.isEmpty()) {
             throw new IllegalStateException("Student has not enrolled to any courses");

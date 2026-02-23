@@ -38,7 +38,7 @@ public class CommentsService {
                 .course(course)
                 .build();
 
-        var userEnrollments = user.getEnrollments();
+        var userEnrollments = user.getEnrollmentEntities();
         byte count = 0;
         for (var enrollment : userEnrollments) {
             if (!enrollment.getCourse().getId().equals(course.getId())) {

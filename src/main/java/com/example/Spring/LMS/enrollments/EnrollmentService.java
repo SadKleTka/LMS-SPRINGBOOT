@@ -45,7 +45,7 @@ public class EnrollmentService {
         var course = courseRepository.findById(courseId).orElseThrow(()
                 -> new EntityNotFoundException("Course not found!"));
 
-        var enrollments = user.getEnrollments();
+        var enrollments = user.getEnrollmentEntities();
         for (var enroll : enrollments) {
             if (enroll.getCourse().getId().equals(course.getId())) {
                 throw new IllegalStateException("Course with id " + courseId + " has been already enrolled");
@@ -76,7 +76,7 @@ public class EnrollmentService {
         var user = usersRepository.findById(userId).orElseThrow(()
                 -> new EntityNotFoundException("User not found!"));
 
-        var enrollments = user.getEnrollments();
+        var enrollments = user.getEnrollmentEntities();
 
         if (enrollments.isEmpty()) {
             throw new EntityNotFoundException("User has no enrolled courses!");

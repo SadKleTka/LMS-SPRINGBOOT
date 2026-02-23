@@ -1,32 +1,24 @@
 package com.example.Spring.LMS.users;
 
+import com.example.Spring.LMS.mapper.UserMapper;
 import com.example.Spring.LMS.users.dto.UserResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UsersService {
 
     private final UsersRepository repository;
 
-    public UsersService(UsersRepository repository) {
-        this.repository = repository;
-    }
+    private final UserMapper mapper;
 
     public List<UserResponse> getAllUsers() {
         var users = repository.findAll();
 
-        return users.stream().map(this::toResponse)
+        return users.stream().map(mapper::toResponse)
                 .toList();
-    }
-
-
-    private UserResponse toResponse(UsersEntity user) {
-        return new UserResponse(
-                user.getId(),
-                user.getUsername(),
-                user.getRole()
-        );
     }
 }

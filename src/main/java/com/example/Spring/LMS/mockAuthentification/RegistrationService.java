@@ -49,13 +49,13 @@ public class RegistrationService {
         }
         String hashedPassword = BCrypt.hashpw(user.password(), BCrypt.gensalt());
 
-        var newUser = new UsersEntity(
-                null,
-                user.username(),
-                user.email(),
-                hashedPassword,
-                user.role()
-        );
+        var newUser = UsersEntity.builder()
+                .username(user.username())
+                .email(user.email())
+                .password(hashedPassword)
+                .role(user.role())
+                .build();
+
         newUser.setDateCreated(LocalDateTime.now());
 
         var saved = repository.save(newUser);
