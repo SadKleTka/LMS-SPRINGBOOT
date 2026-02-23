@@ -4,23 +4,19 @@ import com.example.Spring.LMS.tests.answers.dto.AnswersToAnswer;
 import com.example.Spring.LMS.tests.questions.dto.QuestionToCreate;
 import com.example.Spring.LMS.tests.test.dto.*;
 import jakarta.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/LMS/course/{id}/lessons/{lessonId}/test")
+@RequiredArgsConstructor
+@Slf4j
 public class TestController {
 
-    private static final Logger log = LoggerFactory.getLogger(TestController.class);
-
     private final TestsService service;
-
-    public TestController(TestsService service) {
-        this.service = service;
-    }
 
     @PostMapping("/questions/{questionId}/delete")
     public ResponseEntity<?> deleteQuestion(

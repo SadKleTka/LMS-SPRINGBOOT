@@ -3,8 +3,8 @@ package com.example.Spring.LMS.lesson;
 import com.example.Spring.LMS.lesson.dto.LessonResponse;
 import com.example.Spring.LMS.lesson.dto.LessonToCreate;
 import jakarta.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,15 +13,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/LMS/course")
+@RequiredArgsConstructor
+@Slf4j
 public class LessonController {
 
-    private final static Logger log = LoggerFactory.getLogger(LessonController.class);
-
     private final LessonsService service;
-
-    public LessonController(LessonsService service) {
-        this.service = service;
-    }
 
     @PostMapping("/{id}/lessons/{lessonId}/delete")
     public ResponseEntity<?> deleteLessonById(
