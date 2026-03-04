@@ -48,7 +48,7 @@ public class CourseController {
                 .body(service.createCourse(userId, course));
     }
 
-    @PostMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     public ResponseEntity<CourseResponse> deleteCourseById(
             @PathVariable Long id,
             @RequestHeader("X-User-id") Long userId

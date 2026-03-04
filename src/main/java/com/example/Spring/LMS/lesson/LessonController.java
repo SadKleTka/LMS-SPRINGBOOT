@@ -19,7 +19,7 @@ public class LessonController {
 
     private final LessonsService service;
 
-    @PostMapping("/{id}/lessons/{lessonId}/delete")
+    @DeleteMapping("/{id}/lessons/{lessonId}/delete")
     public ResponseEntity<?> deleteLessonById(
             @PathVariable Long id,
             @PathVariable Long lessonId,

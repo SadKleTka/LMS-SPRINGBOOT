@@ -18,7 +18,7 @@ public class TestController {
 
     private final TestsService service;
 
-    @PostMapping("/questions/{questionId}/delete")
+    @DeleteMapping("/questions/{questionId}/delete")
     public ResponseEntity<?> deleteQuestion(
             @PathVariable Long id,
             @PathVariable Long lessonId,
@@ -70,7 +70,7 @@ public class TestController {
                 .body(service.getTest(lessonId));
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     public ResponseEntity<Test> deleteTest(
             @PathVariable Long id,
             @PathVariable Long lessonId,
