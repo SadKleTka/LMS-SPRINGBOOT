@@ -4,6 +4,7 @@ import com.example.Spring.LMS.annotations.AuthorizedUser;
 import com.example.Spring.LMS.comments.dto.CommentToCreate;
 import com.example.Spring.LMS.comments.dto.CommentToResponse;
 import com.example.Spring.LMS.users.UsersEntity;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequestMapping("/LMS/course/{id}/comments")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "Comments", description = "Comments actions")
 public class CommentsController {
 
     private final CommentsService service;

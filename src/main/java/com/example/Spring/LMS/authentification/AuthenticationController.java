@@ -6,6 +6,8 @@ import com.example.Spring.LMS.security.JwtService;
 import com.example.Spring.LMS.users.impl.UserDetailsImpl;
 import com.example.Spring.LMS.users.UsersEntity;
 import com.example.Spring.LMS.users.dto.UserResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +23,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/LMS/auth")
 @Slf4j
+@Tag(name = "Auth", description = "Authentication/Authorization")
 public class AuthenticationController {
 
     private final AuthenticationService service;
@@ -31,7 +34,7 @@ public class AuthenticationController {
 
     private final UserDetailsImpl usersDetailsImpl;
 
-
+    @Operation(summary = "Login", security = {})
     @PostMapping("/login")
     public Map<String, String> login(
             @RequestBody
@@ -53,6 +56,7 @@ public class AuthenticationController {
         return Map.of("token", token);
     }
 
+    @Operation(summary = "Registration", security = {})
     @PostMapping("/registration")
     public ResponseEntity<UserResponse> register(
             @RequestBody

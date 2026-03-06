@@ -6,6 +6,7 @@ import com.example.Spring.LMS.tests.answers.dto.AnswersToAnswer;
 import com.example.Spring.LMS.tests.questions.dto.QuestionToCreate;
 import com.example.Spring.LMS.tests.test.dto.*;
 import com.example.Spring.LMS.users.UsersEntity;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/LMS/course/{id}/lessons/{lessonId}/test")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "TestController", description = "Test and linked actions")
 public class TestController {
 
     private final TestsService service;

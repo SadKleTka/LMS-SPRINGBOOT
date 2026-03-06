@@ -2,6 +2,7 @@ package com.example.Spring.LMS.progresses;
 
 import com.example.Spring.LMS.annotations.StudentOrAdmin;
 import com.example.Spring.LMS.users.UsersEntity;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/LMS")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "Progress", description = "Progress actions")
 public class ProgressController {
 
     private final ProgressService service;

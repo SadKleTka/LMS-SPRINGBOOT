@@ -5,6 +5,7 @@ import com.example.Spring.LMS.annotations.StudentOrAdmin;
 import com.example.Spring.LMS.course.dto.CourseResponse;
 import com.example.Spring.LMS.enrollments.dto.Enrollment;
 import com.example.Spring.LMS.users.UsersEntity;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequestMapping("/LMS/enrollment/courses")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "Enrollments", description = "Enrollments actions")
 public class EnrollmentController {
 
     private final EnrollmentService service;

@@ -5,6 +5,7 @@ import com.example.Spring.LMS.annotations.AuthorizedUser;
 import com.example.Spring.LMS.lesson.dto.LessonResponse;
 import com.example.Spring.LMS.lesson.dto.LessonToCreate;
 import com.example.Spring.LMS.users.UsersEntity;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,7 @@ import java.util.List;
 @RequestMapping("/LMS/course")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "Lessons", description = "Lessons actions")
 public class LessonController {
 
     private final LessonsService service;

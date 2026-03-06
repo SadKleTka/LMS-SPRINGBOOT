@@ -1,7 +1,9 @@
 package com.example.Spring.LMS.progresses;
 
+import com.example.Spring.LMS.enrollments.EnrollmentsRepository;
 import com.example.Spring.LMS.enums.StatusOfProgress;
 import com.example.Spring.LMS.enums.UserRole;
+import com.example.Spring.LMS.exceptions.NoPermissionException;
 import com.example.Spring.LMS.lesson.LessonsRepository;
 import com.example.Spring.LMS.mapper.ProgressMapper;
 import com.example.Spring.LMS.users.UsersRepository;
@@ -10,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -26,6 +27,8 @@ public class ProgressServiceImpl implements ProgressService {
 
     private final UsersRepository usersRepository;
 
+    private final EnrollmentsRepository enrollmentsRepository;
+
     @Override
     public void completeLesson(Long id, Long userId) {
         var user = usersRepository.findById(userId).orElseThrow(()
@@ -38,25 +41,14 @@ public class ProgressServiceImpl implements ProgressService {
         var lesson = lessonsRepository.findById(id).orElseThrow(()
                 -> new EntityNotFoundException("Lesson not found"));
 
-        var progresses = user.getStudentsProgressEntities();
-        byte count = 0;
-        for (ProgressEntity progress : progresses) {
-            if (!progress.getLessons().getId().equals(lesson.getId())) {
-                count++;
-            }
-            if (count == progresses.size()) {
-                throw new IllegalArgumentException("You are not enrolled to this lesson");
-            }
+        if (!enrollmentsRepository.existsByStudentAndCourse(user, lesson.getCourse())) {
+            throw new NoPermissionException("You have no permission to complete this lesson");
         }
 
-        var newProgress = ProgressEntity.builder()
-                .completedAt(LocalDateTime.now())
-                .student(user)
-                .lessons(lesson)
-                .status(StatusOfProgress.FINISHED)
-                .build();
+        var progress = repository.findByStudentAndStatusAndLesson(user, StatusOfProgress.STARTED, lesson).orElseThrow(()
+                -> new IllegalStateException("Lesson has been already completed"));
 
-        repository.save(newProgress);
+        repository.finishLesson(progress.getId(), StatusOfProgress.FINISHED);
     }
 
     @Transactional(readOnly = true)

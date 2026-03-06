@@ -8,6 +8,7 @@ import com.example.Spring.LMS.course.CourseEntity;
 import com.example.Spring.LMS.course.CourseRepository;
 import com.example.Spring.LMS.mapper.LessonMapper;
 import com.example.Spring.LMS.users.UsersRepository;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Tag(name = "Lessons")
 public class LessonsServiceImpl implements LessonsService {
 
     private final LessonMapper lessonMapper;
@@ -70,7 +72,7 @@ public class LessonsServiceImpl implements LessonsService {
         var user = usersRepository.findById(userId).orElseThrow(()
                 -> new EntityNotFoundException("User with id " + userId + " not found"));
 
-        if (enrollmentsRepository.existsByStudentAndCourse(user, course)) {
+        if (!enrollmentsRepository.existsByStudentAndCourse(user, course)) {
             throw new NoPermissionException("You are not allowed to perform this action");
         }
 
@@ -109,7 +111,7 @@ public class LessonsServiceImpl implements LessonsService {
         var user = usersRepository.findById(userId).orElseThrow(()
                 -> new EntityNotFoundException("User with id " + userId + " not found"));
 
-        if (enrollmentsRepository.existsByStudentAndCourse(user, course))
+        if (!enrollmentsRepository.existsByStudentAndCourse(user, course))
                 throw new NoPermissionException("There is no enrolled lesson");
 
         List<LessonEntity> lessons = course.getLessons();
