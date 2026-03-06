@@ -1,14 +1,16 @@
 package com.example.Spring.LMS.users;
 
+import com.example.Spring.LMS.annotations.AuthorizedUser;
 import com.example.Spring.LMS.users.dto.UserResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.Path;
 import java.util.List;
 
 @RestController
@@ -23,12 +25,24 @@ public class UsersController {
         this.service = service;
     }
 
+    @AuthorizedUser
     @GetMapping
     public ResponseEntity<List<UserResponse>> getAllUsers() {
         log.info("Getting all users");
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(service.getAllUsers());
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUserById(
+            @PathVariable Long id
+    ) {
+        log.info("Deleting user {}", id);
+
+        service.deleteUserById(id);
     }
 
 }

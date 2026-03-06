@@ -10,11 +10,11 @@ import org.mapstruct.Mappings;
 @Mapper(componentModel = "spring")
 public interface EnrollmentMapper {
 
-    @Mapping(source = "student.username", target = "student.name")
+    @Mapping(target = "student.name", expression = "java(usersEntity.getName())")
     Enrollment toResponse(EnrollmentEntity enrollmentEntity);
 
     @Mappings({
-            @Mapping(source = "student.username", target = "name"),
+            @Mapping(source = "course.name", target = "name"),
             @Mapping(source = "course.description", target = "description"),
             @Mapping(source = "course.category", target = "category"),
             @Mapping(source = "course.level", target = "level"),

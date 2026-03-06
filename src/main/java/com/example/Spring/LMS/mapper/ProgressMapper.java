@@ -11,7 +11,7 @@ public interface ProgressMapper {
 
     @Mappings({
             @Mapping(source = "lessons.name", target = "lessonName"),
-            @Mapping(source = "student.username", target = "name"),
+            @Mapping(target = "name", expression = "java(entity.getStudent().getName())"),
             @Mapping(source = "completedAt", target = "date")
     })
     ProgressToResponse toResponse(ProgressEntity entity);

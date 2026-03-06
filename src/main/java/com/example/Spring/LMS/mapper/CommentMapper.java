@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface CommentMapper {
 
-    @Mapping(source = "user.username", target = "name")
+    @Mapping(target = "name", expression = "java(comment.getUser().getName())")
     @Mapping(source = "createdAt", target = "time")
     CommentToResponse commentToResponse(CommentEntity comment);
 

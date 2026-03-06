@@ -1,10 +1,10 @@
-package com.example.Spring.LMS.mockAuthentification;
+package com.example.Spring.LMS.authentification.dto;
 
 import jakarta.validation.constraints.NotNull;
 
 public record UserToLogin(
         @NotNull
-        String username,
+        String email,
         @NotNull
         String password
 ) {
