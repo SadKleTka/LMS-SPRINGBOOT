@@ -9,7 +9,7 @@ architecture.
 
 ## 🚀 Tech Stack
 
--   **Java 17**
+-   **Java 24**
 -   **Spring Boot**
 -   **Spring Security (JWT Authentication)**
 -   **Spring Data JPA**
@@ -106,7 +106,7 @@ Application will start on:
   POST     /auth/register        Register new user
   POST     /auth/login           Authenticate and receive JWT
   GET      /courses              Get all courses
-  POST     /courses              Create new course
+  POST     /courses/create       Create new course
   GET      /lessons/{courseId}   Get lessons by course
 
 ------------------------------------------------------------------------

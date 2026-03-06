@@ -2,6 +2,7 @@ package com.example.Spring.LMS.exceptions.exceptionsHandler;
 
 import com.example.Spring.LMS.exceptions.ErrorMessages;
 import com.example.Spring.LMS.exceptions.NoPermissionException;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
