@@ -6,8 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 
 public record UserToCreate(
-        @Null
-        Long id,
         @NotNull
         String username,
         @NotNull

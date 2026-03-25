@@ -23,9 +23,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public UserResponse register(UserToCreate user) {
-        if (user.id() != null) {
-            throw new IllegalStateException("You can't place your id");
-        }
 
         if (repository.findByEmail(user.email()).isPresent()) {
             throw new IllegalStateException("User with this email already exists");
