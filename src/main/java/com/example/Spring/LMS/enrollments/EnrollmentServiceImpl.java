@@ -11,6 +11,7 @@ import com.example.Spring.LMS.progresses.ProgressesRepository;
 import com.example.Spring.LMS.users.UsersRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class EnrollmentServiceImpl implements EnrollmentService {
 
     private final EnrollmentMapper enrollmentMapper;
@@ -35,9 +37,12 @@ public class EnrollmentServiceImpl implements EnrollmentService {
 
     @Override
     public Enrollment enrollToTheCourse(Long userId, Long courseId) {
+        long start = System.nanoTime();
         var user = usersRepository.findById(userId).orElseThrow(()
                 -> new EntityNotFoundException("User not found!"));
 
+        long end = System.nanoTime();
+        log.info("find a user took {}", end - start);
         var course = courseRepository.findById(courseId).orElseThrow(()
                 -> new EntityNotFoundException("Course not found!"));
 

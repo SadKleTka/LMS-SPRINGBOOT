@@ -1,152 +1,237 @@
-# 🎓 Spring Boot LMS (Learning Management System)
 
-A RESTful Learning Management System built with **Spring Boot**.\
-This project demonstrates backend development skills including
-authentication, role-based access control, database design, and clean
-architecture.
+---
 
-------------------------------------------------------------------------
+# 📚 LMS Spring Boot API
 
-## 🚀 Tech Stack
+## 📌 Overview
 
--   **Java 24**
--   **Spring Boot**
--   **Spring Security (JWT Authentication)**
--   **Spring Data JPA**
--   **PostgreSQL**
--   **Hibernate**
--   **Maven**
--   **Lombok**
--   **Docker (optional)**
+This project is a Learning Management System (LMS) REST API built using **Spring Boot**.
+It provides functionality for managing users, courses, lessons, tests, comments, enrollments, and progress tracking.
 
-------------------------------------------------------------------------
+The application follows a layered architecture with clear separation of concerns:
 
-## 📌 Features
+* Controller layer (REST endpoints)
+* Service layer (business logic)
+* Repository layer (database access)
 
-### 👤 Authentication & Authorization
+---
 
--   User registration
--   Login with JWT
--   Role-based access control (ADMIN / TEACHER / STUDENT)
--   Secure endpoints with Spring Security
+## 🚀 Features
 
-### 📚 Course Management
+* User registration and authentication
+* Role-based access (Admin, Teacher, Student)
+* Course creation and management
+* Lesson and test management
+* Enrollment system
+* Progress tracking
+* Commenting system
+* JWT-based authentication
 
--   Create, update, delete courses (ADMIN / TEACHER)
--   View available courses (all authenticated users)
--   Assign users to courses
+---
 
-### 📝 Lessons & Content
+## 🛠️ Tech Stack
 
--   Add lessons to courses
--   Retrieve lessons by course
--   Structured course content
+* Java 17+
+* Spring Boot
+* Spring Security (JWT)
+* Spring Data JPA (Hibernate)
+* PostgreSQL
+* MapStruct
+* Lombok
+* Docker (optional)
 
-### 📊 Database Design
-
--   Proper entity relationships (One-to-Many, Many-to-Many)
--   Clean layered architecture:
-    -   Controller
-    -   Service
-    -   Repository
-    -   DTO
-    -   Security layer
-
-------------------------------------------------------------------------
-
-## 🏗 Architecture
-
-The project follows a clean REST architecture:
-
-Controller → Service → Repository → Database
-
-Security is handled using JWT filters integrated into Spring Security.
-
-------------------------------------------------------------------------
-
-## ⚙️ How to Run
-
-### 1️⃣ Clone the repository
-
-``` bash
-git clone https://github.com/your-username/your-repository.git
-cd your-repository
-```
-
-### 2️⃣ Configure database
-
-Update `application.yml` (or `application.properties`) with your
-PostgreSQL credentials:
-
-``` yaml
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/lms
-    username: your_username
-    password: your_password
-```
-
-### 3️⃣ Run the application
-
-``` bash
-mvn clean install
-mvn spring-boot:run
-```
-
-Application will start on:
-
-    http://localhost:8080
-
-------------------------------------------------------------------------
-
-## 🔐 Example API Endpoints
-
-  Method   Endpoint              Description
-  -------- --------------------- ------------------------------
-  POST     /auth/register        Register new user
-  POST     /auth/login           Authenticate and receive JWT
-  GET      /courses              Get all courses
-  POST     /courses/create       Create new course
-  GET      /lessons/{courseId}   Get lessons by course
-
-------------------------------------------------------------------------
+---
 
 ## 📂 Project Structure
 
-    src
-     ├── controller
-     ├── service
-     ├── repository
-     ├── security
-     ├── dto
-     └── entity
+```
+src/main/java/com/example/Spring/LMS
+│
+├── controllers        # REST controllers
+├── services          # Business logic
+├── repositories      # Data access layer
+├── entities          # JPA entities
+├── dto               # Data Transfer Objects
+├── mappers           # MapStruct mappers
+├── security          # JWT + security config
+└── enums             # Enums (roles, levels, etc.)
+```
 
-------------------------------------------------------------------------
+---
 
-## 💡 What This Project Demonstrates
+## 🔐 Authentication & Authorization
 
--   Practical use of Spring Security with JWT
--   Understanding of REST API design
--   Clean code structure and separation of concerns
--   Real-world backend architecture
--   Database relationship modeling
+The application uses **JWT (JSON Web Tokens)** for authentication.
 
-------------------------------------------------------------------------
+* Stateless authentication
+* Token is passed in `Authorization: Bearer <token>`
+* Role-based access control via annotations (`@PreAuthorize`)
 
-## 🧠 Future Improvements
+---
 
--   Pagination & filtering
--   Swagger/OpenAPI documentation
--   Unit & integration tests
--   Docker Compose setup
--   File upload support
+## ⚙️ API Endpoints (Examples)
 
-------------------------------------------------------------------------
+### Auth
+
+```
+POST /LMS/auth/register
+POST /LMS/auth/login
+```
+
+### Courses
+
+```
+POST /courses
+GET /courses/{id}
+DELETE /courses/{id}
+```
+
+### Lessons / Tests / Comments
+
+```
+POST /courses/{courseId}/lessons
+POST /tests
+POST /comments
+```
+
+---
+
+## 🧠 Documentation (Algorithms, Data Structures & Logic)
+
+This section explains the core technical concepts used in the project.
+
+### 📊 Data Structures
+
+* **List** — used for storing collections (courses, lessons, comments)
+* **Map (HashMap)** — used internally for fast lookups (e.g., roles, claims)
+* **Entities (JPA)** — represent relational database tables
+* **DTOs (Records)** — used for safe data transfer between layers
+
+---
+
+### ⚙️ Algorithms & Logic
+
+#### 1. Authentication Flow
+
+* User sends credentials
+* System validates user via `UserDetailsService`
+* JWT token is generated using secret key
+* Token is parsed on each request
+* User is authenticated via `SecurityContextHolder`
+
+#### 2. Authorization Logic
+
+* Based on roles (ADMIN, TEACHER, STUDENT)
+* Implemented using:
+
+    * `@PreAuthorize`
+    * Security configuration rules
+
+#### 3. Enrollment Check Algorithm
+
+Before allowing actions (e.g., commenting), the system verifies:
+
+```
+IF user is enrolled in course
+    allow action
+ELSE
+    throw exception
+```
+
+#### 4. Mapping Algorithm (MapStruct)
+
+* Converts Entity → DTO
+* Avoids exposing internal structure
+* Automatically maps fields with same names
+
+---
+
+### 🧩 Core Modules
+
+#### Users Module
+
+Handles:
+
+* Registration
+* Login
+* Role assignment
+
+#### Courses Module
+
+Handles:
+
+* Course creation (Teacher/Admin)
+* Course retrieval
+
+#### Lessons Module
+
+Handles:
+
+* Lesson creation inside courses
+
+#### Tests Module
+
+Handles:
+
+* Creating and managing tests
+
+#### Comments Module
+
+Handles:
+
+* Adding comments (only enrolled users)
+
+#### Progress Module
+
+Tracks:
+
+* Course completion status
+
+---
+
+## ⚠️ Challenges Faced
+
+### 1. JWT Configuration
+
+* Handling token validation
+* Fixing weak key issues (needed ≥256-bit key)
+* Correct parsing of claims
+
+### 2. Spring Security Errors
+
+* 403 errors despite valid token
+* Misconfigured `SecurityFilterChain`
+* Role-based access issues
+
+### 3. JPA & Queries
+
+* Non-unique results in queries
+* Incorrect JPQL syntax
+* Handling relationships (`@ManyToOne`, `@OneToMany`)
+
+### 4. Mapping Issues
+
+* Null fields in DTOs (MapStruct)
+* Incorrect nested mappings
+
+### 5. Docker & Database
+
+* PostgreSQL connection issues
+* Volume configuration errors
+
+---
+
+## 📈 Future Improvements
+
+* Add integration tests
+* Improve exception handling
+* Add pagination & filtering
+* Implement caching (Redis)
+* Add frontend (React)
+
+---
 
 ## 👨‍💻 Author
 
-Backend Developer focused on Java & Spring ecosystem.
+**Backend Developer focused on Java & Spring ecosystem.**
 
-------------------------------------------------------------------------
-
-⭐ If you like this project, feel free to star the repository!
